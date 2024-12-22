@@ -1,0 +1,72 @@
+:root {
+	--todo-background: #cedce6;
+	--circle-background: --border-color: #ffffff;
+}
+
+body {
+	padding: 20px;
+}
+
+button {
+	margin: 10px 5px;
+	border-radius: 20%;
+	border-width: 1px;
+	background-color: antiquewhite;
+}
+
+button:hover {
+	background: rgba(250, 235, 215, 0.418);
+	border-color: rgba(0, 0, 0, 0.452);
+}
+
+.toDoListTitle {
+	counter-reset: li;
+	font:
+		20px 'Trebuchet MS',
+		'Lucida Sans';
+	padding: 0;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.37);
+}
+
+.toDoItem {
+	padding: 5px 5px 5px 20px;
+	margin: 10px;
+	background: #9cc5d19d;
+	text-decoration: none;
+	border-radius: 10px;
+}
+
+.toDoItem:hover {
+	background: #cedce646;
+}
+
+.selectedToDoItem {
+	padding: 5px 5px 5px 20px;
+	margin: 10px;
+	background: #8bd3b7d5;
+	text-decoration: none;
+	border-radius: 10px;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.37);
+}
+
+.loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25px;
+	height: 25px;
+	border: 5px solid gray;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: loader 1s infinite;
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
