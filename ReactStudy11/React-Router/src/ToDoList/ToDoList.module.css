@@ -5,6 +5,7 @@
 
 body {
 	padding: 20px;
+	background-color: white;
 }
 
 button {
@@ -34,19 +35,11 @@ button:hover {
 	background: #9cc5d19d;
 	text-decoration: none;
 	border-radius: 10px;
+	word-wrap: break-word;
 }
 
 .toDoItem:hover {
 	background: #cedce646;
-}
-
-.selectedToDoItem {
-	padding: 5px 5px 5px 20px;
-	margin: 10px;
-	background: #8bd3b7d5;
-	text-decoration: none;
-	border-radius: 10px;
-	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.37);
 }
 
 .loader {
@@ -69,4 +62,8 @@ button:hover {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.taskTitle {
+	font-weight: bold;
 }

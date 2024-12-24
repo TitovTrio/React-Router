@@ -10,6 +10,16 @@ export const useRequestToDoList = (setToDos, refreshToDos, setIsLoading) => {
 	}, [refreshToDos]);
 };
 
+export const useRequestToDoItem = (id, setCurrentItem, refreshToDos, setIsLoading) => {
+	useEffect(() => {
+		setIsLoading(true);
+		fetch(`http://localhost:3000/toDos/${id}`)
+			.then((response) => response.json())
+			.then((data) => setCurrentItem(data))
+			.finally(() => setIsLoading(false));
+	}, [refreshToDos]);
+};
+
 export const useSearchInToDoList = (
 	searchInput,
 	toDos,

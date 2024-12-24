@@ -4,30 +4,22 @@ export const ToDoListLayout = ({
 	toDos,
 	setToDos,
 	addItem,
-	selectedItem,
-	setSelectedItem,
 	refreshToDos,
 	setRefreshToDos,
-	deleteItem,
-	changeItem,
 	isLoading,
 	searchInput,
 	setSearchInput,
 	sortAlphabetOrder,
 	sortButtonStatus,
 	setSortButtonStatus,
+	navigate,
+	cutLongText,
 }) => (
 	<>
 		<div className={styles.toDoListTitle}>Список дел</div>
 
 		<button onClick={() => addItem(setRefreshToDos, refreshToDos)}>
 			Добавить дело
-		</button>
-		<button onClick={() => deleteItem(selectedItem, setRefreshToDos, refreshToDos)}>
-			Удалить дело
-		</button>
-		<button onClick={() => changeItem(selectedItem, setRefreshToDos, refreshToDos)}>
-			Изменить дело
 		</button>
 		<button
 			onClick={() =>
@@ -53,18 +45,17 @@ export const ToDoListLayout = ({
 			<div className={styles.loader}></div>
 		) : (
 			<ol>
-				{toDos.map(({ id, title }) => {
+				{toDos.map(({ id, title, content }) => {
 					return (
 						<li
-							className={
-								selectedItem === id
-									? styles.selectedToDoItem
-									: styles.toDoItem
-							}
+							className={styles.toDoItem}
 							key={id}
-							onClick={() => setSelectedItem(id)}
+							onClick={() => navigate(`/ToDoItem/${id}`)}
 						>
-							{title}
+							<div className={styles.taskTitle}>{title}</div>
+							<div className={styles.taskContent}>
+								{cutLongText(content)}
+							</div>
 						</li>
 					);
 				})}

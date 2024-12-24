@@ -1,5 +1,6 @@
 export const addItem = (setRefreshToDos, refreshToDos) => {
 	const itemTitle = prompt('Введите название дела:');
+	const itemContent = prompt('Введите описание дела:');
 
 	fetch('http://localhost:3000/toDos', {
 		method: 'POST',
@@ -7,6 +8,7 @@ export const addItem = (setRefreshToDos, refreshToDos) => {
 		body: JSON.stringify({
 			id: Math.floor(Math.random() * 100000),
 			title: itemTitle,
+			content: itemContent,
 		}),
 	})
 		.then((response) => response.json())
@@ -16,15 +18,17 @@ export const addItem = (setRefreshToDos, refreshToDos) => {
 		});
 };
 
-export const changeItem = (selectedItem, setRefreshToDos, refreshToDos) => {
-	const itemTitle = selectedItem && prompt('Введите новое название дела:');
+export const changeItem = (id, setRefreshToDos, refreshToDos) => {
+	const itemTitle = id && prompt('Введите новое название дела:');
+	const itemContent = id && prompt('Введите новое описание дела:');
 
-	fetch(`http://localhost:3000/toDos/${selectedItem}`, {
+	fetch(`http://localhost:3000/toDos/${id}`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
 		body: JSON.stringify({
-			id: selectedItem,
+			id: id,
 			title: itemTitle,
+			content: itemContent,
 		}),
 	})
 		.then((response) => response.json())
@@ -34,14 +38,15 @@ export const changeItem = (selectedItem, setRefreshToDos, refreshToDos) => {
 		});
 };
 
-export const deleteItem = (selectedItem, setRefreshToDos, refreshToDos) => {
-	fetch(`http://localhost:3000/toDos/${selectedItem}`, {
+export const deleteItem = (id, navigate, setRefreshToDos, refreshToDos) => {
+	fetch(`http://localhost:3000/toDos/${id}`, {
 		method: 'DELETE',
 	})
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
 			setRefreshToDos(!refreshToDos);
+			navigate(-1);
 		});
 };
 
@@ -65,4 +70,12 @@ export const sortAlphabetOrder = (
 				}),
 			)
 		: setRefreshToDos(!refreshToDos);
+};
+
+export const cutLongText = (text) => {
+	if (text.length >= 100) {
+		return text.substr(0, 100) + '...';
+	} else {
+		return text;
+	}
 };

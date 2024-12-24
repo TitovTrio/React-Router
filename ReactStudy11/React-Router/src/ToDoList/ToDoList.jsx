@@ -1,16 +1,17 @@
 import { ToDoListLayout } from './ToDoListLayout';
 import { useState } from 'react';
 import { useRequestToDoList, useSearchInToDoList, useDebounce } from './hooks';
-import { addItem, deleteItem, changeItem, sortAlphabetOrder } from './funcs';
+import { addItem, sortAlphabetOrder, cutLongText } from './funcs';
+import { useNavigate } from 'react-router-dom';
 
 export const ToDoList = () => {
 	const [refreshToDos, setRefreshToDos] = useState(false);
-	const [selectedItem, setSelectedItem] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [toDos, setToDos] = useState([]);
 	const [sortButtonStatus, setSortButtonStatus] = useState(false);
 	const [searchInput, setSearchInput] = useState('');
 	const debouncedInput = useDebounce(searchInput, 300);
+	const navigate = useNavigate();
 
 	useRequestToDoList(setToDos, refreshToDos, setIsLoading);
 	useSearchInToDoList(debouncedInput, toDos, setToDos, refreshToDos, setRefreshToDos);
@@ -22,16 +23,14 @@ export const ToDoList = () => {
 			addItem={addItem}
 			refreshToDos={refreshToDos}
 			setRefreshToDos={setRefreshToDos}
-			selectedItem={selectedItem}
-			setSelectedItem={setSelectedItem}
-			deleteItem={deleteItem}
-			changeItem={changeItem}
 			isLoading={isLoading}
 			searchInput={searchInput}
 			setSearchInput={setSearchInput}
 			sortAlphabetOrder={sortAlphabetOrder}
 			sortButtonStatus={sortButtonStatus}
 			setSortButtonStatus={setSortButtonStatus}
+			navigate={navigate}
+			cutLongText={cutLongText}
 		/>
 	);
 };
